@@ -1,0 +1,29 @@
+import '../models/product.dart';
+
+sealed class SearchState {
+  const SearchState();
+}
+
+final class SearchIdle extends SearchState {
+  const SearchIdle();
+}
+
+final class SearchLoading extends SearchState {
+  const SearchLoading();
+}
+
+final class SearchResults extends SearchState {
+  const SearchResults(this.products);
+  final List<Product> products;
+}
+
+/// Zero results is a normal answer, not an error.
+final class SearchEmpty extends SearchState {
+  const SearchEmpty(this.query);
+  final String query;
+}
+
+final class SearchError extends SearchState {
+  const SearchError(this.message);
+  final String message;
+}
